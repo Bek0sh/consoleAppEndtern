@@ -20,12 +20,13 @@ public class ProductRepository implements IProductRepository {
         Connection con = null;
         try {
             con = idb.getConnection();
-            String sql = "INSERT INTO products(name,price,description) VALUES (?,?,?)";
+            String sql = "INSERT INTO products(name,price,description,type) VALUES (?,?,?,?)";
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setString(1, product.getName());
             st.setInt(2, product.getPrice());
             st.setString(3, product.getDescription());
+            st.setString(4, product.getTypeOfProduct());
 
             st.execute();
             return true;
@@ -40,7 +41,7 @@ public class ProductRepository implements IProductRepository {
         Connection con = null;
         try {
             con = idb.getConnection();
-            String sql = "SELECT id, name, price, description FROM products";
+            String sql = "SELECT id, name, price, description, type FROM products";
             Statement st = con.createStatement();
 
             ResultSet rst = st.executeQuery(sql);
@@ -50,7 +51,8 @@ public class ProductRepository implements IProductRepository {
                 Product product = new Product(rst.getInt("id"),
                         rst.getString("name"),
                         rst.getInt( "price"),
-                        rst.getString("description")
+                        rst.getString("description"),
+                        rst.getString("type")
                         );
                 products.add(product);
             }
@@ -79,6 +81,34 @@ public class ProductRepository implements IProductRepository {
             prst.execute();
 
             return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Product> getByType(String type) {
+        Connection con;
+        try {
+            con = idb.getConnection();
+            String sql = "SELECT * FROM products WHERE type=?";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, type);
+
+            ResultSet rst = st.executeQuery();
+            List<Product> products = new LinkedList<>();
+
+            while (rst.next()) {
+                Product product = new Product(rst.getInt("id"),
+                        rst.getString("name"),
+                        rst.getInt( "price"),
+                        rst.getString("description"),
+                        rst.getString("type")
+                );
+                products.add(product);
+            }
+            return products;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

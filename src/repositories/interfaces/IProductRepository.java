@@ -9,4 +9,5 @@ public interface IProductRepository {
     List<Product> getAll();
 
     boolean removeProduct(int id);
+    List<Product> getByType(String type);
 }
