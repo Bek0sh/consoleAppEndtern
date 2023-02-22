@@ -119,6 +119,8 @@ public class MyApplication {
                 System.out.println("1. Create product");
                 System.out.println("2. Get all the products");
                 System.out.println("3. Remove product");
+                System.out.println("4. Get sorted products by price");
+                System.out.println("5. Get products by type");
                 System.out.println("0. Exit from the market");
                 System.out.println();
 
@@ -130,6 +132,10 @@ public class MyApplication {
                     getAllProducts();
                 if (n == 3)
                     removeProd();
+                if (n == 4)
+                    getSortedProducts();
+                if (n == 5)
+                    getProductsByType();
                 if (n == 0)
                     break;
 
@@ -148,13 +154,27 @@ public class MyApplication {
         int price = input.nextInt();
         System.out.println("Enter some description");
         String description = input.next();
-        String response = marketController.createUser(name, price, description);
+        System.out.println("Enter type of product");
+        String type = input.next();
+        String response = marketController.createUser(name, price, description, type);
 
         System.out.println(response);
     }
 
     public void getAllProducts() {
         String response = marketController.getAllUsers();
+        System.out.println(response);
+    }
+
+    public void getSortedProducts() {
+        String response = marketController.sortProductByPrice();
+        System.out.println(response);
+    }
+
+    public void getProductsByType(){
+        System.out.println("Enter type of product");
+        String type = sc.next();
+        String response = marketController.getProductsByType(type);
         System.out.println(response);
     }
 
