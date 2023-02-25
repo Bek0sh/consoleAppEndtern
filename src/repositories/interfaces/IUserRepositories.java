@@ -1,6 +1,6 @@
 package repositories.interfaces;
 
-import entitie.User;
+import entities.User;
 
 public interface IUserRepositories {
 
@@ -11,5 +11,4 @@ public interface IUserRepositories {
 
     boolean resetPassword(String email, String password);
 
-    boolean deleteAccount(int id);
 }

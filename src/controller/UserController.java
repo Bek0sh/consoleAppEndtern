@@ -1,6 +1,6 @@
 package controller;
 
-import entitie.User;
+import entities.User;
 import repositories.interfaces.IUserRepositories;
 
 public class UserController {
@@ -19,12 +19,7 @@ public class UserController {
     }
 
 
-    public String deleteUser(int id) {
 
-        boolean deleted = repo.deleteAccount(id);
-
-        return (deleted ? "User was deleted" : "Something went wrong");
-    }
 
 
 

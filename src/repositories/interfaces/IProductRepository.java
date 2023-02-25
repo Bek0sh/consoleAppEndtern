@@ -1,6 +1,6 @@
 package repositories.interfaces;
 
-import entitie.Product;
+import entities.Product;
 
 import java.util.List;
 

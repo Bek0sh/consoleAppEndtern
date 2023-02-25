@@ -1,6 +1,6 @@
 package controller;
 
-import entitie.Product;
+import entities.Product;
 import repositories.interfaces.IProductRepository;
 
 import java.util.Collections;
@@ -13,8 +13,8 @@ public class MarketController {
         this.repo = repo;
     }
 
-    public String createUser(String name, int price, String description, String type) {
-        Product product = new Product(name, price, description, type);
+    public String createUser(String name, int price, String description, String type, String author) {
+        Product product = new Product(name, price, description, type, author);
 
         boolean created = repo.create(product);
 
@@ -43,4 +43,5 @@ public class MarketController {
         List<Product> products = repo.getByType(type);
         return products.toString();
     }
+
 }

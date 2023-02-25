@@ -1,4 +1,4 @@
-package entitie;
+package entities;
 
 import lombok.*;
 
@@ -12,12 +12,14 @@ public class Product implements Comparable<Product>{
     private int price;
     private String description;
     private String typeOfProduct;
+    private String author;
 
-    public Product(String name, int price, String description, String typeOfProduct) {
+    public Product(String name, int price, String description, String typeOfProduct, String author) {
         setName(name);
         setPrice(price);
         setDescription(description);
         setTypeOfProduct(typeOfProduct);
+        setAuthor(author);
     }
 
     public void setName(String name) {
@@ -43,6 +45,7 @@ public class Product implements Comparable<Product>{
                 "name = " + name + ", \n" +
                 "price = " + price + "$" + ", \n" +
                 "description = " + description + "\n" +
+                "author = " + author +
                 '}';
     }
 

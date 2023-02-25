@@ -8,10 +8,10 @@ public class PostgresDB implements IDB {
 
     @Override
     public Connection getConnection() {
-        String connection = "jdbc:postgresql://localhost:5432/mydb";
+        String connection = "jdbc:postgresql://localhost:5432/demo";
         try {
             Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection(connection, "test", "thyfh123");
+            return DriverManager.getConnection(connection, "postgres", "1234");
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }

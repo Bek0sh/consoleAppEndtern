@@ -24,9 +24,8 @@ public class MyApplication {
             System.out.println("Welcome to My Application");
             System.out.println("Select option:");
             System.out.println("1. Sign In");
-            System.out.println("2. Sign in as a guest");
-            System.out.println("3. Create User");
-            System.out.println("4. Reset Password");
+            System.out.println("2. Create User");
+            System.out.println("3. Reset Password");
             System.out.println("0. Exit");
             System.out.println();
             try
@@ -35,10 +34,8 @@ public class MyApplication {
                 if (num == 1)
                     signIn();
                 if (num == 2)
-                    mainPage();
-                if (num == 3)
                     createAcc();
-                if (num == 4)
+                if (num == 3)
                     resetPassword();
                 if(num == 0)
                     break;
@@ -110,24 +107,26 @@ public class MyApplication {
     }
 
     public void mainPage() {
+        String name = getAuthenticatedUser().getName();
         try
         {
             while (true) {
                 System.out.println();
-                System.out.println("Welcome to the market " + getAuthenticatedUser().getName());
+                System.out.println("Welcome to the market " + name);
                 System.out.println("What do want to do");
                 System.out.println("1. Create product");
                 System.out.println("2. Get all the products");
                 System.out.println("3. Remove product");
                 System.out.println("4. Get sorted products by price");
                 System.out.println("5. Get products by type");
+                System.out.println("6. Delete account");
                 System.out.println("0. Exit from the market");
                 System.out.println();
 
-                int n = input.nextInt();
+                int n = sc.nextInt();
 
                 if (n == 1)
-                    createProduct();
+                    createProduct(name);
                 if (n == 2)
                     getAllProducts();
                 if (n == 3)
@@ -136,6 +135,7 @@ public class MyApplication {
                     getSortedProducts();
                 if (n == 5)
                     getProductsByType();
+
                 if (n == 0)
                     break;
 
@@ -146,7 +146,7 @@ public class MyApplication {
         }
     }
 
-    public void createProduct() {
+    public void createProduct(String author) {
 
         System.out.println("Enter what do you want to add");
         String name = sc.next();
@@ -156,7 +156,7 @@ public class MyApplication {
         String description = input.next();
         System.out.println("Enter type of product");
         String type = input.next();
-        String response = marketController.createUser(name, price, description, type);
+        String response = marketController.createUser(name, price, description, type, author);
 
         System.out.println(response);
     }

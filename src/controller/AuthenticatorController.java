@@ -1,6 +1,6 @@
 package controller;
 
-import entitie.User;
+import entities.User;
 import repositories.interfaces.IUserRepositories;
 
 public class AuthenticatorController {

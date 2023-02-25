@@ -1,7 +1,7 @@
 package repositories;
 
 import data.IDB;
-import entitie.Product;
+import entities.Product;
 import repositories.interfaces.IProductRepository;
 
 import java.sql.*;
@@ -20,13 +20,14 @@ public class ProductRepository implements IProductRepository {
         Connection con = null;
         try {
             con = idb.getConnection();
-            String sql = "INSERT INTO products(name,price,description,type) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO products(name,price,description,type, author) VALUES (?,?,?,?,?)";
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setString(1, product.getName());
             st.setInt(2, product.getPrice());
             st.setString(3, product.getDescription());
             st.setString(4, product.getTypeOfProduct());
+            st.setString(5, product.getAuthor());
 
             st.execute();
             return true;
@@ -41,7 +42,7 @@ public class ProductRepository implements IProductRepository {
         Connection con = null;
         try {
             con = idb.getConnection();
-            String sql = "SELECT id, name, price, description, type FROM products";
+            String sql = "SELECT id, name, price, description,type,author FROM products";
             Statement st = con.createStatement();
 
             ResultSet rst = st.executeQuery(sql);
@@ -52,7 +53,8 @@ public class ProductRepository implements IProductRepository {
                         rst.getString("name"),
                         rst.getInt( "price"),
                         rst.getString("description"),
-                        rst.getString("type")
+                        rst.getString("type"),
+                        rst.getString("author")
                         );
                 products.add(product);
             }
@@ -91,7 +93,7 @@ public class ProductRepository implements IProductRepository {
         Connection con;
         try {
             con = idb.getConnection();
-            String sql = "SELECT * FROM products WHERE type=?";
+            String sql = "SELECT id, name, price, description,type,author  FROM products WHERE type=?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, type);
 
@@ -103,7 +105,8 @@ public class ProductRepository implements IProductRepository {
                         rst.getString("name"),
                         rst.getInt( "price"),
                         rst.getString("description"),
-                        rst.getString("type")
+                        rst.getString("type"),
+                        rst.getString("author")
                 );
                 products.add(product);
             }

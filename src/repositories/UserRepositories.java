@@ -1,7 +1,7 @@
 package repositories;
 
 import data.IDB;
-import entitie.User;
+import entities.User;
 import repositories.interfaces.IUserRepositories;
 
 import java.sql.*;
@@ -88,7 +88,6 @@ public class UserRepositories implements IUserRepositories {
         try {
             con = idb.getConnection();
             String sql = "UPDATE students SET password = ? WHERE email = ?";
-            // здесь пока ошибка надо исправить
             PreparedStatement prst = con.prepareStatement(sql);
 
             prst.setString(1, password);
@@ -101,23 +100,5 @@ public class UserRepositories implements IUserRepositories {
         }
     }
 
-    @Override
-    public boolean deleteAccount(int id) {
-        Connection con;
-        try {
-            con = idb.getConnection();
-            String sql = "DELETE FROM students WHERE id = ?";
-
-            PreparedStatement prst = con.prepareStatement(sql);
-
-            prst.setInt(1, id);
-
-            prst.execute();
-            return true;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }
